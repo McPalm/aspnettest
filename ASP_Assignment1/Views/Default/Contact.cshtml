@@ -1,0 +1,28 @@
+@using ASP_Assignment1.Models;
+@{
+
+    ViewData["Title"] = "Contact";
+    List<ContactInformation> contactInformation = new List<ContactInformation>()
+    {
+        new ContactInformation(){ Media = "Discord", Handle = "palm#6309"},
+        new ContactInformation(){ Media = "Phone", Handle = "07X-XXXXXXX"},
+        new ContactInformation(){ Media = "Email", Handle = "Henlo@worl.com"},
+        new ContactInformation(){ Media = "Twitter", Handle = "@BitAssembly", URL = "https://twitter.com/BitAssembly"},
+    };
+}
+
+<p>Reach me at</p>
+<ul>
+    @foreach (var item in contactInformation)
+    {
+        @if (string.IsNullOrEmpty(item.URL))
+        {
+            <li><strong>@item.Media</strong>: @item.Handle</li>
+        }
+        else
+        {
+            <li><strong>@item.Media</strong>: <a href="@item.URL">@item.Handle</a></li>
+        }
+    }
+</ul>
+

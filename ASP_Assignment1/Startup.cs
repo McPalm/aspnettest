@@ -26,17 +26,22 @@ namespace ASP_Assignment1
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    "Fever Check",
+                    "fevercheck/{id?}",
+                    new {controller = "default", action ="fevercheck"}
+                    );
+                routes.MapRoute(
                     name: "default",
-                    template: "{controller=default}/{action=index}");
+                    template: "{controller=default}/{action=index}/{id?}");
             });
-            /*
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });*/
         }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        Microsoft.AspNetCore.WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>();
     }
 }

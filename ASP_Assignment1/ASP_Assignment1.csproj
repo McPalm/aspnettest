@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <None Include="wwwroot\main.css" />
   </ItemGroup>
 
 </Project>

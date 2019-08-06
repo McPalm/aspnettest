@@ -4,11 +4,32 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/main.css" />
 </head>
 <body>
-    <h1>@ViewBag.Title</h1>
-    <div>
+    <header>
+        <div class="header">
+            <div class="center-body flex">
+                <div class="user-avatar hover-near-bottom">
+                    <img src="/Assets/BitAssembly.png" title="Hello!" />
+                </div>
+                <h1 class="hover-near-bottom">
+                    @ViewBag.Title
+                </h1>
+            </div>
+        </div>
+    </header>
+    <section class="center-body">
+        <ul>
+            <li><a asp-controller="Default" asp-action="Index">Index</a></li>
+            <li><a asp-controller="Default" asp-action="CV">CV</a></li>
+            <li><a asp-controller="Default" asp-action="Contact">Contact</a></li>
+            <li><a asp-controller="Default" asp-action="FeverCheck">Fever Check</a></li>
+        </ul>
+    </section>
+    <section class="center-body">
         @RenderBody()
-    </div>
+    </section>
 </body>
 </html>
+

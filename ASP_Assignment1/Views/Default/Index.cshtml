@@ -1,10 +1,44 @@
 
 @{
     ViewBag.Title = "Index";
-}
 
+
+    float average = 0f;
+    var Random = new System.Random();
+    Func<int> roll = () => Random.Next(6) + 1;
+    Func<int> controlValue = () => roll() + roll() + roll();
+    Func<int[], int> Min = (a) =>
+    {
+        var r = 6;
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i] < r)
+                r = a[i];
+        }
+        return r;
+    };
+    Func<int> BestValue = () =>
+    {
+        int[] rolls = { roll(), roll(), roll(), roll() };
+        return rolls[0] + rolls[1] + rolls[2] + rolls[3] - Min(rolls);
+    };
+    float regular = 0;
+    float advantage = 0;
+    for(int i = 0; i < 1000; i++)
+    {
+        regular += controlValue();
+        advantage += BestValue();
+    }
+    regular /= 1000f;
+    advantage /= 1000f;
+}
 <p>I much rather write this in whats it a called again, visual studio code.
     Can you do razor page development in visual studio code?
     I kinda want the answer to be yes, because it has just way nicer tools for web develoment.</p>
+<div>
+    <p><strong>3d6: </strong> @regular</p>
+    <p><strong>4d6d1: </strong> @advantage</p>
+</div>
+<img src="~/Assets/BitAssembly.png" />
 
 
