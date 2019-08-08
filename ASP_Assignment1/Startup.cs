@@ -16,6 +16,17 @@ namespace ASP_Assignment1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -27,12 +38,18 @@ namespace ASP_Assignment1
             }
 
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     "Fever Check",
                     "fevercheck/{id?}",
                     new {controller = "default", action ="fevercheck"}
+                    );
+                routes.MapRoute(
+                    "Guessing Game",
+                    "guessinggame",
+                    new { controller = "default", action = "guessinggame" }
                     );
                 routes.MapRoute(
                     name: "default",

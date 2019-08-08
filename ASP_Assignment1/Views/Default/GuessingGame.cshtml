@@ -1,0 +1,45 @@
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "GuessingGame";
+    bool correct = ViewBag?.Correct ?? false;
+}
+
+<h1>GuessingGame</h1>
+
+@if (ViewData.ContainsKey("Guess"))
+{
+    <p>You guessed: @ViewData["Guess"]</p>
+    @if (correct)
+    {
+        <p>That is correct, Woo! <br />
+        Got it in @ViewData["Guesses"] tries.</p>
+    }
+    else if ((bool)ViewData["GuessTooLow"])
+    {
+        <p>Higher!<br />You have guessed: @ViewData["Guesses"] times.</p>
+    }
+    else
+    {
+        <p>Lower!<br />You have guessed: @ViewData["Guesses"] times.</p>
+    }
+
+}
+
+@if (correct)
+{
+    <form asp-action="GuessingGame">
+        <input type="number" name="guess" autofocus/>
+        <input type="submit" />
+    </form>
+}
+
+@if(ViewData["HighScores"] != null && ((int[])ViewData["HighScores"]).Length > 0)
+{
+    <h3>High Scores!</h3>
+    <ol>
+        @foreach(var score in (int[])ViewData["HighScores"])
+        {
+            <li>@score points</li>
+        }
+    </ol>
+}
