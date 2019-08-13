@@ -31,7 +31,7 @@ namespace ASP_Assignment1.Controllers
                         case 'o':
                             if (query.Substring(2).ToLower() == "name")
                                 filtered = filtered.OrderBy(p => p.Name);
-                            else if(query.Substring(2).ToLower() == "age")
+                            else if (query.Substring(2).ToLower() == "age")
                                 filtered = filtered.OrderBy(p => p.Age);
                             else if (query.Substring(2).ToLower() == "rage")
                                 filtered = filtered.OrderBy(p => -p.Age);
