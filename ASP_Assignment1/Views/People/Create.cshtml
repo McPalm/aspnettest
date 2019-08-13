@@ -1,0 +1,30 @@
+@model Person
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<form asp-action="Create">
+    @Html.EditorForModel()
+    <input type="submit" />
+</form>
+<!--
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name" />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Age" />
+        <input asp-for="Age" />
+        <span asp-validation-for="Age"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="City" />
+        <input asp-for="City" />
+        <span asp-validation-for="City"></span>
+    </div>
+    <input type="submit" />
+</form>
+    -->

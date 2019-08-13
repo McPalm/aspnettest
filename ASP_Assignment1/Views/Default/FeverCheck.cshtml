@@ -1,12 +1,6 @@
 @model ASP_Assignment1.Models.Temperature;
 @{
     ViewData["Title"] = "FeverCheck";
-
-    float temp = 0f;
-    if (ViewData.ContainsKey("Temperature"))
-    {
-        temp = (float)ViewData["Temperature"];
-    }
 }
 
 <form asp-controller="default" asp-action="fevercheck">
@@ -14,20 +8,20 @@
     <button type="submit" value="5">Check</button>
 </form>
 
-@if ((bool)ViewData["HasTemp"])
+@if (Model != null)
 {
-    <p>@temp&#8451;</p>
-    @if(temp > 42 || temp < 35f)
+    <p>@Model.Celcius&#8451;</p>
+    @if(Model.IsDead)
     {
         <p><strong>Youre actually dead, RIP.</strong></p>
     }
-    else if (temp > 38f)
+    else if (Model.HasFever)
     {
         <p><strong>You have a fever</strong>, oh no!</p>
         <img src="http://placekitten.com/650/420" />
         <p>Here is a kitten to cheer you up, get well soon.</p>
     }
-    else if(temp < 37f)
+    else if(Model.HasTheChill)
     {
         <p>Seem a bit cold there...</p>
     }
