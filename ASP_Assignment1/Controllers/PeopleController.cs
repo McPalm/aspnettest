@@ -14,7 +14,17 @@ namespace ASP_Assignment1.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(people);
+            return View(people.Take(10).ToList());
+        }
+
+        public IActionResult GetPeoplePartial(int page)
+        {
+            return PartialView("_PeopleList", people.Skip(page * 10).Take(10));
+        }
+
+        public IActionResult GetCreatePartial()
+        {
+            return PartialView("_CreatePartial");
         }
 
         [HttpPost]
@@ -52,7 +62,7 @@ namespace ASP_Assignment1.Controllers
                 }
             }
 
-            return View(filtered.ToList());
+            return View(filtered.Take(10).ToList());
         }
 
         [HttpGet]

@@ -9,11 +9,21 @@
     <input type="Text" name="filter" />
     <button type="submit">Search</button>
 </form>
-<a asp-controller="People" asp-action="create">Create a Person</a>
+<a class="page" asp-controller="People" asp-action="GetCreatePartial">Create a Person</a>
 
-@foreach (var person in Model)
-{
-    <div>
-        @await Html.PartialAsync("_PersonPreview", person)
-    </div>
-}
+<a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="0">page 1</a>
+<a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="1">page 2</a>
+<a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="2">page 3</a>
+<div id="page_content"></div>
+
+
+<script>
+    $('.page').click(function (e) {
+        e.preventDefault();
+        let _this = $(this);
+        $.get(_this.attr("href"), function (response) {
+            $('#page_content').html(response);
+        });
+    });
+    
+</script>

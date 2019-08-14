@@ -1,7 +1,15 @@
 @model Person
 @{ }
 
-<div>
-    @Model.Name, @Model.Age @if(Model.City != null) {<span> from @Model.City.</span>}
+<div class="row">
+    <div class="column">
+        @Model.Name
+    </div>
+    <div class="column">
+        @Model.Age
+    </div>
+    <div class="column">
+        @Model.City
+    </div>
     <a class="delete" asp-controller="People" asp-action="Delete" asp-route-name="@Model.Name">Delete</a>
 </div>

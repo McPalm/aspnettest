@@ -1,109 +1,137 @@
 body {
-  --white: #eee;
-  --black: #222;
-  --main: #76d669;
-  --main-dark: #865f23;
-  --main-bright: rgb(185, 255, 168);
-  --gray: rgb(224, 224, 224);
-  --contrast: rgb(109, 9, 183);
-  --clear: rgba(0, 0, 0, 0);
+    --white: #eee;
+    --black: #222;
+    --main: #76d669;
+    --main-dark: #865f23;
+    --main-bright: rgb(185, 255, 168);
+    --gray: rgb(224, 224, 224);
+    --contrast: rgb(109, 9, 183);
+    --clear: rgba(0, 0, 0, 0);
+    --text-dark: #222;
+    --text-bright: #eee;
 }
 
 * {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html {
-  height: 100%;
-  
+    height: 100%;
 }
 
 body {
-  margin: 0;
-  background-color: var(--gray);
-  display: grid;
-  min-height: 100%;
-  background-image: url("Assets/BitAssemblyRedesign.png");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: 20vw;
-  background-position: 100% 100%;
+    margin: 0;
+    background-color: var(--gray);
+    display: grid;
+    min-height: 100%;
+    background-image: url("Assets/BitAssemblyRedesign.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 20vw;
+    background-position: 100% 100%;
 }
+
 header {
-  background-image: url("Assets/PatreonBanner.png");
-  background-attachment: fixed;
-  width: 100%;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  text-shadow: 0 0 7px black;
+    background-image: url("Assets/PatreonBanner.png");
+    background-attachment: fixed;
+    width: 100%;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    text-shadow: 0 0 7px black;
 }
 
 .header {
-  background-image: linear-gradient(to bottom, var(--clear) 75%, black 100%);
-  height: 350px;
-  border-bottom: solid black 4px;
-  width: 100%;
-  margin: 0;
+    background-image: linear-gradient(to bottom, var(--clear) 75%, black 100%);
+    height: 350px;
+    border-bottom: solid black 4px;
+    width: 100%;
+    margin: 0;
 }
 
 .flex {
-  display: flex;
-  height: 100%;
+    display: flex;
+    height: 100%;
 }
 
 .hover-near-bottom {
-  margin-bottom: 75px;
-  margin-top: auto;
+    margin-bottom: 75px;
+    margin-top: auto;
 }
 
 section, nav {
-  background-color: var(--white);
-  margin-bottom: 2em;
+    background-color: var(--white);
+    margin-bottom: 2em;
 }
 
 .header h1 {
-  font-weight: 100;
-  color: var(--white);
-  font-size: 3rem;
-  text-align: left;
-  margin-left: 2rem;
+    font-weight: 100;
+    color: var(--white);
+    font-size: 3rem;
+    text-align: left;
+    margin-left: 2rem;
 }
 
 .user-avatar {
-  border: solid var(--main-dark) 3px;
-  border-radius: 50%;
-  height: 5em;
-  width: 5em;
-  overflow: hidden;
+    border: solid var(--main-dark) 3px;
+    border-radius: 50%;
+    height: 5em;
+    width: 5em;
+    overflow: hidden;
 }
 
-.user-avatar img {
-  width: 100%;
-  height: 100%;
-}
+    .user-avatar img {
+        width: 100%;
+        height: 100%;
+    }
 
 .center-body {
-  width: 40em;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 2em 5em;
+    width: 40em;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2em 5em;
 }
+
 p {
-  line-height: 2;
-  margin-bottom: 4em;
+    line-height: 2;
+    margin-bottom: 4em;
 }
 
 .footer {
-  background-color: var(--main-dark);
-  padding-bottom: 1em;
-  color: var(--main-bright);
+    background-color: var(--main-dark);
+    padding-bottom: 1em;
+    color: var(--main-bright);
 }
 
-.footer span:last-child {
-  float: right;
+    .footer span:last-child {
+        float: right;
+    }
+
+    .footer a {
+        text-decoration: none;
+        color: var(--main-bright);
+    }
+
+.table {
+    border-style: solid;
+    border-color: var(--gray);
 }
 
-.footer a {
-  text-decoration: none;
-  color: var(--main-bright);
+.row {
+    display: grid;
+    grid-template-columns: 30% 2.5em auto 6em;
+    background-color: var(--gray);
+    padding: 5px;
+}
+
+    .row:nth-child(2n+1) {
+        background-color: var(--white);
+    }
+
+.column {
+    border-style: none solid none none;
+    border-color: var(--white);
+}
+
+.row:nth-child(2n+1) .column {
+    border-color: var(--gray);
 }

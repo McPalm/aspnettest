@@ -1,0 +1,9 @@
+@model IEnumerable<Person>;
+@{ }
+
+<div class="table">
+    @foreach (var person in Model)
+    {
+        <partial name="_PersonPreview" model="person" />
+    }
+</div>
