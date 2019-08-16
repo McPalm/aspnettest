@@ -18,23 +18,24 @@ namespace ASP_Assignment1.Controllers
             return View(_db);
         }
 
-        public IActionResult GetPeoplePartial(int page)
+        public IActionResult GetPeoplePartial() => PartialView("_PeopleList", _db);
+
+        public IActionResult SetFilter(string filter)
         {
-            if(page > -1)
-                _db.Page = page;
-            return PartialView("_PeopleList", _db);
+            _db.Filter = filter;
+            Console.WriteLine("I Am Here!");
+            return GetPeoplePartial();
+        }
+
+        public IActionResult GetPage(int page)
+        {
+            _db.Page = page;
+            return GetPeoplePartial();
         }
 
         public IActionResult GetCreatePartial()
         {
             return PartialView("_CreatePartial");
-        }
-
-        [HttpPost]
-        public IActionResult Index(string filter)
-        {
-            _db.Filter = filter;
-            return RedirectToAction("Index");
         }
 
         [HttpGet]

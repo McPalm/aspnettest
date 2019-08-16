@@ -5,26 +5,34 @@
 
 <h1>People</h1>
 
-<form asp-controller="People" asp-action="Index">
-    <input type="Text" name="filter" />
+<form class="search-set-content" asp-controller="People" asp-action="SetFilter">
+    <input type="Text" name="filter" id="filter" />
     <button type="submit">Search</button>
 </form>
-<a class="page" asp-controller="People" asp-action="GetCreatePartial">Create a Person</a>
-
-<a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="0">page 1</a>
-<a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="1">page 2</a>
-<a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="2">page 3</a>
-<div id="page_content">
+<a class="set-content" asp-controller="People" asp-action="GetCreatePartial">Create a Person</a>
+<a class="set-content" asp-controller="People" asp-action="GetPage" asp-route-page="0">page 1</a>
+<a class="set-content" asp-controller="People" asp-action="GetPage" asp-route-page="1">page 2</a>
+<a class="set-content" asp-controller="People" asp-action="GetPage" asp-route-page="2">page 3</a>
+<div id="page-content">
     <partial name="_PeopleList" for=@Model />
 </div>
 
 
 <script>
-    $('.page').click(function (e) {
+    $('.set-content').click(function (e) {
         e.preventDefault();
         let _this = $(this);
         $.get(_this.attr("href"), function (response) {
-            $('#page_content').html(response);
+            $('#page-content').html(response);
+        });
+    });
+    $('.search-set-content').submit(function (e) {
+        e.preventDefault();
+        let _this = $(this);
+        let searchString = $("#filter").val();
+        let command = _this.attr("action");
+        $.get(command + '?filter=' + searchString, function (response) {
+            $('#page-content').html(response);
         });
     });
     
