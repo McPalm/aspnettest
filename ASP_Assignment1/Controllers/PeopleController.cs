@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASP_Assignment1.Models;
+using ASP_Assignment1.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP_Assignment1.Controllers
 {
     public class PeopleController : Controller
     {
-        static List<Person> people = PeopleList.List;
+        static PeopleList _db { get; set; } = PeopleList.GetMock();
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(people.Take(10).ToList());
+            return View(_db);
         }
 
         public IActionResult GetPeoplePartial(int page)
         {
-            return PartialView("_PeopleList", people.Skip(page * 10).Take(10));
+            if(page > -1)
+                _db.Page = page;
+            return PartialView("_PeopleList", _db);
         }
 
         public IActionResult GetCreatePartial()
@@ -30,39 +33,8 @@ namespace ASP_Assignment1.Controllers
         [HttpPost]
         public IActionResult Index(string filter)
         {
-            IEnumerable<Person> filtered = people;
-            foreach (var query in filter.Split(' '))
-            {
-                if(query.Length > 2 && query[1] == ':')
-                {
-                    switch(query[0])
-                    {
-                        case 's':
-                        case 'o':
-                            if (query.Substring(2).ToLower() == "name")
-                                filtered = filtered.OrderBy(p => p.Name);
-                            else if (query.Substring(2).ToLower() == "age")
-                                filtered = filtered.OrderBy(p => p.Age);
-                            else if (query.Substring(2).ToLower() == "rage")
-                                filtered = filtered.OrderBy(p => -p.Age);
-                            else if (query.Substring(2).ToLower() == "iage")
-                                filtered = filtered.OrderBy(p => -p.Age);
-                            else if (query.Substring(2).ToLower() == "city")
-                                filtered = filtered.OrderBy(p => p.City);
-                            break;
-                    }
-                }
-                else
-                {
-                    filtered = filtered.Where(person =>
-                    {
-                        return person.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase)
-                        || (person.City != null && person.City.Contains(query, StringComparison.CurrentCultureIgnoreCase));
-                    });
-                }
-            }
-
-            return View(filtered.Take(10).ToList());
+            _db.Filter = filter;
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -71,9 +43,9 @@ namespace ASP_Assignment1.Controllers
             return View();
         }
 
-        public IActionResult Delete(string name)
+        public IActionResult Delete(int key)
         {
-            people.RemoveAll(p => p.Name == name);
+            _db.Dictionary.Remove(key);
             return RedirectToAction("Index");
         }
 
@@ -82,10 +54,10 @@ namespace ASP_Assignment1.Controllers
         {
             if (ModelState.IsValid)
             {
-                people.Add(person);
+                _db.Add(person);
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(); // were refreshing the page here.
         }
     }
 }

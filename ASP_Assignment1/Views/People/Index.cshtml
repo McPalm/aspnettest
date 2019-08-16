@@ -1,4 +1,4 @@
-@model List<Person>;
+@model PeopleList
 @{
     ViewData["Title"] = "People";
 }
@@ -14,7 +14,9 @@
 <a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="0">page 1</a>
 <a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="1">page 2</a>
 <a class="page" asp-controller="People" asp-action="GetPeoplePartial" asp-route-page="2">page 3</a>
-<div id="page_content"></div>
+<div id="page_content">
+    <partial name="_PeopleList" for=@Model />
+</div>
 
 
 <script>

@@ -1,15 +1,15 @@
-@model Person
+@model KeyValuePair<int, Person>
 @{ }
 
 <div class="row">
     <div class="column">
-        @Model.Name
+        @Model.Value.Name
     </div>
     <div class="column">
-        @Model.Age
+        @Model.Value.Age
     </div>
     <div class="column">
-        @Model.City
+        @Model.Value.City
     </div>
-    <a class="delete" asp-controller="People" asp-action="Delete" asp-route-name="@Model.Name">Delete</a>
+    <a class="delete" asp-controller="People" asp-action="Delete" asp-route-key="@Model.Key">Delete</a>
 </div>
